@@ -15,6 +15,7 @@ import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import './artist.scss';
 import { getArtistDetails } from '@/api/searchArtist';
+import { NavBar } from '@/Components/NavBar';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -29,25 +30,26 @@ const darkTheme = createTheme({ palette: { mode: 'dark' } });
 export const Artist = () => {
     return (
         <Box sx={{ height: '100vh' }}>
-                <article className="profile">
-            <Stack spacing={3} direction={{ md: 'row', xs: 'column' }} justifyContent='flex-start'>
-                <Box>
-                    <div className="profile-image">
-                        <Image alt='Artist' width={175}
-                            height={175} src="https://e-cdns-images.dzcdn.net/images/artist/712f71a2a10dc7c9e0f32dde114ed6b6/1000x1000-000000-80-0-0.jpg" />
-                    </div>
-                    <h2 className="profile-username">Davido</h2>
-                    <small className="profile-user-handle">3,000 Fans</small>
-                    <small className="profile-user-handle">6,000 ALbums</small>
-                    <div className="profile-actions">
-                        <button onClick={() => getArtistDetails('eminem')} className="btn btn--primary">View Artist</button>
-                    </div>
-</Box>
+            <NavBar />
+            <article className="profile">
+                <Stack spacing={3} direction={{ md: 'row', xs: 'column' }} justifyContent='flex-start'>
+                    <Box>
+                        <div className="profile-image">
+                            <Image alt='Artist' width={175}
+                                height={175} src="https://e-cdns-images.dzcdn.net/images/artist/712f71a2a10dc7c9e0f32dde114ed6b6/1000x1000-000000-80-0-0.jpg" />
+                        </div>
+                        <h2 className="profile-username">Davido</h2>
+                        <small className="profile-user-handle">3,000 Fans</small>
+                        <small className="profile-user-handle">6,000 ALbums</small>
+                        <div className="profile-actions">
+                            <button onClick={() => getArtistDetails('eminem')} className="btn btn--primary">View Artist</button>
+                        </div>
+                    </Box>
                     <Grid container>
                         <Grid item xs={12}>
                             <ThemeProvider theme={darkTheme}>
                                 <Box
-                                mb={1}
+                                    mb={1}
                                     sx={{
                                         display: 'grid',
                                         gridTemplateColumns: { md: '1fr' },
@@ -58,7 +60,7 @@ export const Artist = () => {
                                     </Item>
                                 </Box>
                                 <Box
-                                mb={1}
+                                    mb={1}
 
                                     sx={{
                                         display: 'grid',
@@ -70,7 +72,7 @@ export const Artist = () => {
                                     </Item>
                                 </Box>
                                 <Box
-                                mb={1}
+                                    mb={1}
 
                                     sx={{
                                         display: 'grid',
@@ -82,7 +84,7 @@ export const Artist = () => {
                                     </Item>
                                 </Box>
                                 <Box
-                                mb={1}
+                                    mb={1}
 
                                     sx={{
                                         display: 'grid',
@@ -94,7 +96,7 @@ export const Artist = () => {
                                     </Item>
                                 </Box>
                                 <Box
-                                mb={1}
+                                    mb={1}
                                     sx={{
                                         display: 'grid',
                                         gridTemplateColumns: { xs: '1fr' },
@@ -107,11 +109,11 @@ export const Artist = () => {
                             </ThemeProvider>
                         </Grid>
                     </Grid>
-            </Stack>
+                </Stack>
 
-                </article>
-            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', maxWidth: '900px', margin: '0 auto', paddingBottom: '50px', paddingLeft: {md: '50px'} }}>
-                <Typography sx={{textAlign: {xs: 'center'}}}>Albums</Typography>
+            </article>
+            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', maxWidth: '900px', margin: '0 auto', paddingBottom: '50px', paddingLeft: { md: '50px' } }}>
+                <Typography sx={{ textAlign: { xs: 'center' } }}>Albums</Typography>
                 <Stack spacing={4} direction='row' justifyContent={{ md: 'flex-start', xs: 'center' }} useFlexGap flexWrap="wrap">
                     <Box>
                         <Image style={{ borderRadius: '10px' }} alt='Artist' width={175}
