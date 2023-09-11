@@ -1,10 +1,16 @@
-import React from 'react';
+"use client"
+import React, { useEffect } from 'react';
 import { CloudIcon } from '@/assets/svg';
 import { BackgroundImage } from '@/assets/images';
-import './home.scss';
 import { Typography } from '@mui/material';
+import { searchArtist } from '@/api/searchArtist';
+import './home.scss';
 
 export const Home = () => {
+    useEffect(() => {
+        // searchArtist('eminem');
+    }, [])
+
     return (
         <>
             <BackgroundImage />
