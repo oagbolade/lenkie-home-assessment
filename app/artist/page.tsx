@@ -1,7 +1,7 @@
-import { Search } from '@/Features/Search';
+import { Artist } from '@/Features/Artist';
 
 export default function SearchPage() {
   return (
-    <Search/>
+    <Artist />
   )
 }
