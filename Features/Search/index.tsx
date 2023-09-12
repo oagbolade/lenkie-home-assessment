@@ -1,27 +1,37 @@
-'use client'
-import * as React from 'react';
+'use client';
+import React from 'react';
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
+import { useApi } from '@/api/useApi';
+import { NavBar } from '@/Components/NavBar';
 import './search.scss';
-import {getArtistDetails} from '@/api/searchArtist';
 
 export const Search = () => {
+    const searchParams = useSearchParams();
+    const name: string = searchParams.get('name') as string;
+    const url = `https://api.deezer.com/search?q=${name}&limit=10`;
+
+    const { data } = useApi(url);
+
     return (
-        <Box sx={{ height: '100vh' }}>
-            <Stack direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
-                <article id='profile' className="profile">
+        <Box sx={{ height: '100%', background: 'black' }}>
+            <NavBar />
+            <Stack sx={{ marginTop: '50px' }} direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
+                {data && data.data.map(({ artist }: any, index: number) =>
+                (<article key={index} id='profile' className="profile">
                     <div className="profile-image">
                         <Image alt='Artist' width={175}
-                            height={175} src="https://e-cdns-images.dzcdn.net/images/artist/712f71a2a10dc7c9e0f32dde114ed6b6/1000x1000-000000-80-0-0.jpg" />
+                            height={175} src={artist.picture_medium} />
                     </div>
-                    <h2 className="profile-username">Davido</h2>
-                    <small className="profile-user-handle">3,000 Fans</small>
-                    <small className="profile-user-handle">6,000 ALbums</small>
+                    <h2 className="profile-username">{artist.name}</h2>
                     <div className="profile-actions">
-                        <button onClick={()=>getArtistDetails('eminem')} className="btn btn--primary">View Artist</button>
+                        <Link href={{ pathname: '/artist', query: { id: artist.id } }} className="btn btn--primary">View Artist</Link>
                     </div>
-                </article>
+                </article>)
+                )}
             </Stack>
         </Box>
     );

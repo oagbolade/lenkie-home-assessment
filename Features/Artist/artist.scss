@@ -2,9 +2,6 @@
 
 .profile {
     cursor: pointer;
-	// display: flex;
-	// align-items: center;
-	// flex-direction: column;
 	padding: 3rem;
 	width: 90%;
 	max-width: 800px;
@@ -44,7 +41,7 @@
 }
 
 .profile-image {
-	border-radius: 50%;
+	border-radius: 50%;	
 	overflow: hidden;
 	width: 175px;
 	height: 175px;
