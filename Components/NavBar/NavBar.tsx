@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useState } from "react";
+import Link from 'next/link'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -61,6 +62,8 @@ const darkTheme = createTheme({
 });
 
 export const NavBar = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={darkTheme}>
@@ -84,13 +87,24 @@ export const NavBar = () => {
                             Music App
                         </Typography>
                         <Search>
-                            <SearchIconWrapper>
-                                <SearchIcon />
-                            </SearchIconWrapper>
                             <StyledInputBase
                                 placeholder="Search…"
                                 inputProps={{ 'aria-label': 'search' }}
+                                onChange={(e) => {
+                                    setSearchTerm(e.target.value);
+                                }}
                             />
+                            <Link href={{ pathname: '/search', query: { name: searchTerm } }}>
+                                <IconButton
+                                    size="large"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    sx={{ mr: 2 }}
+                                >
+                                    <SearchIcon />
+                                </IconButton>
+                            </Link>
                         </Search>
                     </Toolbar>
                 </AppBar>

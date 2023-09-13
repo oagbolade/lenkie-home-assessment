@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from 'next/link'
 import { SearchOutlined } from "@mui/icons-material";
 import {
@@ -6,7 +7,6 @@ import {
     InputBaseProps,
     Paper,
 } from "@mui/material";
-import { useState } from "react";
 
 type Props = {
     inputProps?: InputBaseProps;
