@@ -1,5 +1,7 @@
+'use client'
 import React, { useState } from "react";
-import Link from 'next/link'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -52,7 +54,11 @@ const darkTheme = createTheme({
 
 export const NavBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
+    const pathname: string | null = usePathname();
 
+    if (pathname === '/') {
+        return;
+    }
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={darkTheme}>

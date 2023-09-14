@@ -8,11 +8,10 @@ import Image from 'next/image';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import { NavBar } from '@/Components/NavBar';
 import { Loading } from '@/Components/Loader/Loading';
 import { MainTitle } from '@/Components/Typography/MainTitle';
 import { useApi } from '@/api/useApi';
-import './artist.scss';
+import { profile, profileImage, profileUserHandle, profileUsername } from '@/Features/Search/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -32,23 +31,22 @@ export const Artist = () => {
     const { data, trackdata, albumdata, isLoading, isTrackLoading } = useApi(url, true);
 
     return (
-        <Box sx={{ height: { xs: '100%', md: 'auto' }, background: 'black' }}>
-            <NavBar />
+        <Box sx={{ height: { xs: '100%', md: '100%' }, background: 'black' }}>
             <Box sx={{ paddingBottom: '50px' }} />
-            <article className="profile">
+            <article style={{ ...profile }}>
                 <Stack spacing={3} direction={{ md: 'row', xs: 'column' }} >
                     <Box>
                         {isLoading ?
                             <Loading />
                             :
                             <>
-                                <Box sx={{ margin: '0 auto', marginLeft: { xs: '20px' }, marginTop: { md: '20px' } }} className="profile-image">
+                                <Box sx={{ margin: '0 auto', marginLeft: { xs: '20px' }, marginTop: { md: '20px' } }} style={{ ...profileImage }}>
                                     <Image alt='Artist' width={175}
                                         height={175} src={data?.picture_medium} />
                                 </Box>
-                                <h2 className="profile-username">{data?.name}</h2>
-                                <div className="profile-user-handle">{data?.nb_fan.toLocaleString("en-US")} Fans</div>
-                                <div className="profile-user-handle">{data?.nb_album.toLocaleString("en-US")} Albums</div>
+                                <h2 style={{ ...profileUsername }}>{data?.name}</h2>
+                                <div style={{ ...profileUserHandle }}>{data?.nb_fan.toLocaleString("en-US")} Fans</div>
+                                <div style={{ ...profileUserHandle }}>{data?.nb_album.toLocaleString("en-US")} Albums</div>
                             </>
                         }
                     </Box>
@@ -80,9 +78,9 @@ export const Artist = () => {
             <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', maxWidth: '900px', margin: '20px auto', marginBottom: '0', paddingBottom: '50px', paddingLeft: { md: '50px' } }}>
                 {isTrackLoading ? <Loading /> :
                     <>
-                    <Box sx={{marginRight: {md: '40px'}}}>
-                        <MainTitle title='Albums' />
-                    </Box>
+                        <Box sx={{ marginRight: { md: '40px' } }}>
+                            <MainTitle title='Albums' />
+                        </Box>
                         <Stack spacing={4} direction='row' justifyContent={{ md: 'flex-start', xs: 'center' }} useFlexGap flexWrap="wrap">
                             {albumdata?.map(({ album }: any, index: number) => (
                                 <Box key={index}>

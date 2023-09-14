@@ -6,9 +6,8 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Image from 'next/image';
 import { useSearchArtist } from '@/api/useApi';
-import { NavBar } from '@/Components/NavBar';
 import { Loading } from '@/Components/Loader/Loading';
-import './search.scss';
+import { profile, profileImage, profileUsername, profileActions, btn, btnPrimary } from './styles';
 
 export const Search = () => {
     const searchParams = useSearchParams();
@@ -18,18 +17,17 @@ export const Search = () => {
 
     return (
         <Box sx={{ height: '100%', background: 'black' }}>
-            <NavBar />
             {isLoading ? <Loading /> :
                 <Stack sx={{ marginTop: '50px' }} direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
                     {data && data.data.map(({ artist }: any, index: number) =>
-                    (<article key={index} id='profile' className="profile">
-                        <div className="profile-image">
+                    (<article style={{ ...profile }} key={index}>
+                        <div style={{ ...profileImage }}>
                             <Image alt='Artist' width={175}
                                 height={175} src={artist.picture_medium} />
                         </div>
-                        <h2 className="profile-username">{artist.name}</h2>
-                        <div className="profile-actions">
-                            <Link href={{ pathname: '/artist', query: { id: artist.id } }} className="btn btn--primary">View Artist</Link>
+                        <h2 style={{ ...profileUsername }}>{artist.name}</h2>
+                        <div style={{ ...profileActions }}>
+                            <Link style={{ ...btn, ...btnPrimary }} href={{ pathname: '/artist', query: { id: artist.id } }}>View Artist</Link>
                         </div>
                     </article>)
                     )}
