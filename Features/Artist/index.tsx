@@ -13,7 +13,6 @@ import { Loading } from '@/Components/Loader/Loading';
 import { MainTitle } from '@/Components/Typography/MainTitle';
 import { useApi } from '@/api/useApi';
 import './artist.scss';
-import 'react-loading-skeleton/dist/skeleton.css';
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -30,19 +29,20 @@ export const Artist = () => {
     const searchParams = useSearchParams();
     const id: string = searchParams.get('id') as string;
     const url = `https://api.deezer.com/artist/${id}`;
-    const { data, trackdata, albumdata, isLoading, isTrackLoading } = useApi(url);
+    const { data, trackdata, albumdata, isLoading, isTrackLoading } = useApi(url, true);
 
     return (
-        <Box sx={{ height: { xs: '100%', md: '100vh' }, background: 'black' }}>
+        <Box sx={{ height: { xs: '100%', md: 'auto' }, background: 'black' }}>
             <NavBar />
             <Box sx={{ paddingBottom: '50px' }} />
             <article className="profile">
-                <Stack spacing={3} direction={{ md: 'row', xs: 'column' }} justifyContent='flex-start' >
-                    <Box ml={3}>
+                <Stack spacing={3} direction={{ md: 'row', xs: 'column' }} >
+                    <Box>
                         {isLoading ?
-                            <Loading /> :
+                            <Loading />
+                            :
                             <>
-                                <Box sx={{ marginLeft: { xs: '20px' }, marginTop: { md: '20px' } }} className="profile-image">
+                                <Box sx={{ margin: '0 auto', marginLeft: { xs: '20px' }, marginTop: { md: '20px' } }} className="profile-image">
                                     <Image alt='Artist' width={175}
                                         height={175} src={data?.picture_medium} />
                                 </Box>
@@ -77,22 +77,25 @@ export const Artist = () => {
                     }
                 </Stack>
             </article>
-            {isTrackLoading ? <Loading /> :
-
-                <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', maxWidth: '900px', margin: '20px auto', paddingBottom: '50px', paddingLeft: { md: '50px' } }}>
-                    <MainTitle title='Albums' />
-                    <Stack spacing={4} direction='row' justifyContent={{ md: 'flex-start', xs: 'center' }} useFlexGap flexWrap="wrap">
-                        {albumdata?.map(({ album }: any, index: number) => (
-                            <Box key={index}>
-                                <Image style={{ borderRadius: '10px' }} alt='Artist' width={175}
-                                    height={175} src={album.cover_medium} />
-                                {albumYear && (<><Typography sx={{ color: 'white', fontWeight: 600, fontSize: '14px' }}>In my room</Typography>
-                                    <Typography sx={{ color: 'white', fontWeight: 400, fontSize: '12px' }}>2023</Typography></>)}
-                            </Box>
-                        ))}
-                    </Stack>
-                </Box>
-            }
+            <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', maxWidth: '900px', margin: '20px auto', marginBottom: '0', paddingBottom: '50px', paddingLeft: { md: '50px' } }}>
+                {isTrackLoading ? <Loading /> :
+                    <>
+                    <Box sx={{marginRight: {md: '40px'}}}>
+                        <MainTitle title='Albums' />
+                    </Box>
+                        <Stack spacing={4} direction='row' justifyContent={{ md: 'flex-start', xs: 'center' }} useFlexGap flexWrap="wrap">
+                            {albumdata?.map(({ album }: any, index: number) => (
+                                <Box key={index}>
+                                    <Image style={{ borderRadius: '10px' }} alt='Artist' width={175}
+                                        height={175} src={album.cover_medium} />
+                                    {albumYear && (<><Typography sx={{ color: 'white', fontWeight: 600, fontSize: '14px' }}>In my room</Typography>
+                                        <Typography sx={{ color: 'white', fontWeight: 400, fontSize: '12px' }}>2023</Typography></>)}
+                                </Box>
+                            ))}
+                        </Stack>
+                    </>
+                }
+            </Box>
         </Box>
     );
 }

@@ -1,7 +1,8 @@
 import './globals.css';
+import NextTopLoader from 'nextjs-toploader';
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import {QueryWrapper} from '@/utils/QueryWrapper'
+import { QueryWrapper } from '@/utils/QueryWrapper'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -16,7 +17,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}><QueryWrapper>{children}</QueryWrapper></body>
+      <body className={inter.className}>
+        <NextTopLoader />
+        <QueryWrapper>
+          {children}
+        </QueryWrapper>
+      </body>
     </html>
   )
 }
