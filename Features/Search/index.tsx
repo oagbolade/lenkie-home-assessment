@@ -19,22 +19,22 @@ export const Search = () => {
     return (
         <Box sx={{ height: '100%', background: 'black' }}>
             <NavBar />
-            {isLoading : <Loading /> :
-            <Stack sx={{ marginTop: '50px' }} direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
-                {data && data.data.map(({ artist }: any, index: number) =>
-                (<article key={index} id='profile' className="profile">
-                    <div className="profile-image">
-                        <Image alt='Artist' width={175}
-                            height={175} src={artist.picture_medium} />
-                    </div>
-                    <h2 className="profile-username">{artist.name}</h2>
-                    <div className="profile-actions">
-                        <Link href={{ pathname: '/artist', query: { id: artist.id } }} className="btn btn--primary">View Artist</Link>
-                    </div>
-                </article>)
-                )}
-            </Stack>
-}
+            {isLoading ? <Loading /> :
+                <Stack sx={{ marginTop: '50px' }} direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
+                    {data && data.data.map(({ artist }: any, index: number) =>
+                    (<article key={index} id='profile' className="profile">
+                        <div className="profile-image">
+                            <Image alt='Artist' width={175}
+                                height={175} src={artist.picture_medium} />
+                        </div>
+                        <h2 className="profile-username">{artist.name}</h2>
+                        <div className="profile-actions">
+                            <Link href={{ pathname: '/artist', query: { id: artist.id } }} className="btn btn--primary">View Artist</Link>
+                        </div>
+                    </article>)
+                    )}
+                </Stack>
+            }
         </Box>
     );
 }

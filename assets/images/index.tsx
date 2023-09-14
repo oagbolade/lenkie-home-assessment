@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Box from '@mui/material/Box';
-import backgroundImage from './backgroundImage.jpg';
+import backgroundImage from './backgroundImage.png';
 
 export const BackgroundImage = () => {
     return (
