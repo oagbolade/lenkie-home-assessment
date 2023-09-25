@@ -20,16 +20,16 @@ export const Search = () => {
             {isLoading ? <Loading /> :
                 <Stack sx={{ marginTop: '50px' }} direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
                     {data && data.data.map(({ artist }: any, index: number) =>
-                    (<article style={{ ...profile }} key={index}>
-                        <div style={{ ...profileImage }}>
+                    (<Box sx={{ ...profile }} key={index}>
+                        <Box sx={{ ...profileImage }}>
                             <Image alt='Artist' width={175}
                                 height={175} src={artist.picture_medium} />
-                        </div>
+                        </Box>
                         <h2 style={{ ...profileUsername }}>{artist.name}</h2>
                         <div style={{ ...profileActions }}>
                             <Link style={{ ...btn, ...btnPrimary }} href={{ pathname: '/artist', query: { id: artist.id } }}>View Artist</Link>
                         </div>
-                    </article>)
+                    </Box>)
                     )}
                 </Stack>
             }

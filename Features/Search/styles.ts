@@ -62,4 +62,5 @@ export const btnPrimary = {
   backgroundImage: "linear-gradient(135deg, #5587ff, #3772ff)",
   color: "#fff",
   padding: "0 1.375em",
+  fontWeight: 600,
 };

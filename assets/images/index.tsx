@@ -8,8 +8,8 @@ export const BackgroundImage = () => {
             <Image
                 src={backgroundImage}
                 alt="Picture of the artist"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: "cover" }}
             />
             <Box
                 style={{
