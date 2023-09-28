@@ -17,7 +17,7 @@ export const Search = () => {
         <Box sx={{ height: '100%', background: 'black' }}>
             {isLoading ? <Loading /> :
                 <Stack sx={{ marginTop: '50px' }} direction='row' justifyContent='center' useFlexGap flexWrap="wrap">
-                    {data && data.data.map(({ artist }: any, index: number) => <ArtistPreview key={index} artist={artist} />)}
+                    {data && data.map(({ artist }: any, index: number) => <ArtistPreview key={index} artist={artist} />)}
                 </Stack>
             }
         </Box>

@@ -10,11 +10,15 @@ import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { ThemeProvider } from '@mui/material/styles';
-import {Search, StyledInputBase, darkTheme} from './styles';
+import { Search, StyledInputBase, darkTheme } from './styles';
 
 export const NavBar = () => {
-    const [searchTerm, setSearchTerm] = useState<string>("");
     const pathname: string | null = usePathname();
+    const [searchTerm, setSearchTerm] = useState<string>("");
+
+    const handleRedirect = () => {
+        window.location.href = `/search?name=${searchTerm}`;
+    }
 
     if (pathname === '/') {
         return;
@@ -52,15 +56,14 @@ export const NavBar = () => {
                                     setSearchTerm(e.target.value);
                                 }}
                             />
-                            <Link href={{ pathname: '/search', query: { name: searchTerm } }}>
-                                <IconButton
-                                    size="large"
-                                    edge="start"
-                                    color="inherit"
-                                >
-                                    <SearchIcon />
-                                </IconButton>
-                            </Link>
+                            <IconButton
+                                onClick={() => handleRedirect()}
+                                size="large"
+                                edge="start"
+                                color="inherit"
+                            >
+                                <SearchIcon />
+                            </IconButton>
                         </Search>
                     </Toolbar>
                 </AppBar>

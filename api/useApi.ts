@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { getTopTracks } from "@/utils/getTopTracks";
 import { getAlbums } from "@/utils/getAlbums";
+import { getUniqueArtists } from "@/utils/getUniqueArtists";
 
 const proxy = "https://cors-server.fly.dev/";
 
@@ -12,7 +13,10 @@ const handleEmptySearch = (router: any, name: string | null | boolean) => {
   }
 };
 
-export const useApi = <T>(url: string, name: string | null | boolean = null) => {
+export const useApi = <T>(
+  url: string,
+  name: string | null | boolean = null
+) => {
   const router = useRouter();
   const [data, setData] = useState<any>(null);
   const [trackdata, setTrackData] = useState<any>(null);
@@ -61,26 +65,11 @@ export const useSearchArtist = <T>(url: string, name: string | null = null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
 
-  // const searchArtist = () => {
-  //   setIsLoading(true);
-  //   axios
-  //     .get(`${proxy}${url}`)
-  //     .then((response) => {
-  //       setData(response.data);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       setError(error);
-  //       setIsLoading(false);
-  //     });
-  //   setIsLoading(true);
-  // };
-
   const searchArtist = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(`${proxy}${url}`);
-      setData(response.data);
+      setData(getUniqueArtists(response.data));
     } catch (error) {
       setError(error);
     } finally {
