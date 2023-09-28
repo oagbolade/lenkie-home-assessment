@@ -61,19 +61,31 @@ export const useSearchArtist = <T>(url: string, name: string | null = null) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
 
-  const searchArtist = () => {
+  // const searchArtist = () => {
+  //   setIsLoading(true);
+  //   axios
+  //     .get(`${proxy}${url}`)
+  //     .then((response) => {
+  //       setData(response.data);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setError(error);
+  //       setIsLoading(false);
+  //     });
+  //   setIsLoading(true);
+  // };
+
+  const searchArtist = async () => {
     setIsLoading(true);
-    axios
-      .get(`${proxy}${url}`)
-      .then((response) => {
-        setData(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-    setIsLoading(true);
+    try {
+      const response = await axios.get(`${proxy}${url}`);
+      setData(response.data);
+    } catch (error) {
+      setError(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {

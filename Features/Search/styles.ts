@@ -1,7 +1,7 @@
 export const profile = {
   cursor: "pointer",
   padding: "3rem",
-  width: "90%",
+  width: "300px",
   maxWidth: "800px",
   backgroundColor: "#1b2028",
   borderRadius: "16px",

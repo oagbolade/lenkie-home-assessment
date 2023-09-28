@@ -24,7 +24,7 @@ export const Artist = () => {
     return (
         <Box sx={{ height: { xs: '100%', md: '100%' }, background: 'black' }}>
             <Box sx={{ paddingBottom: '50px' }} />
-            <Box sx={{ ...profile }}>
+            <Box sx={{ ...profile, width: '90%' }}>
                 <Stack spacing={3} direction={{ md: 'row', xs: 'column' }} >
                     <Box>
                         {isLoading ?

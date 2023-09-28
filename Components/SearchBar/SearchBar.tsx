@@ -31,7 +31,7 @@ export const SearchBar = (props: Props) => {
                 {...props.inputProps}
             />
             <Divider sx={{ height: 28, mx: 0.5 }} orientation="vertical" />
-            <Link href={{ pathname: '/search', query: { name: searchTerm } }}>
+            <Link href={{ pathname: '/search', query: { name: searchTerm } }} replace>
                 <SearchOutlined />
             </Link>
         </Paper>
